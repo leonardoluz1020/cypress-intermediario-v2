@@ -1,5 +1,6 @@
 describe('Login', () => {
-  it.only('Successfully', () => {
-    
+  it('Successfully', () => {
+    cy.login()
+    cy.get('.qa-user-avatar').should('be.visible')
   })
 })

@@ -6,7 +6,7 @@ module.exports = defineConfig({
     env: {
       hideCredentials: true,
       requestMode: true,
-      snapshotOnly : true      
+      snapshotOnly : true,
     }
   },
   fixturesFolder: false,

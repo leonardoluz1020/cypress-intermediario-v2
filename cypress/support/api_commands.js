@@ -27,7 +27,32 @@ Cypress.Commands.add('api_deleteProjects', () => {
         res.body.forEach(project => cy.request({
             method: 'DELETE',
             url: `/api/v4/projects/${project.id}`,
-            headers: { authorization: acessToken},
-        })) 
-        )
+            headers: { authorization: acessToken },
+        }))
+    )
+})
+Cypress.Commands.add('api_createIssue', (issue) => {
+    cy.api_createProject(issue.project)
+        .then(response => {
+            cy.request({
+                method: 'POST',
+                url: `/api/v4/projects/${response.body.id}/issues`,
+                body: {
+                    title: issue.title,
+                    description: issue.description
+                },
+                headers: { authorization: acessToken }
+            })
+        })
+})
+Cypress.Commands.add('api_createLabel', (projectId, label) => {
+    cy.request({
+        method: 'POST',
+        url: `/api/v4/projects/${projectId}/labels`,
+        body: {
+            name: label.name,
+            color: label.color
+        },
+        headers: { Authorization: acessToken }
+    })
 })
